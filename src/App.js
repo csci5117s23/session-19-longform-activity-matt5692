@@ -11,9 +11,6 @@ function App() {
   return (
     <div className="App">
       <div>
-      <Flashcard front="hello" back="world"></Flashcard>
-      </div>
-      <div>
         <FlashcardList cards={QUESTIONS}></FlashcardList>
       </div>
     </div>

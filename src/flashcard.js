@@ -10,6 +10,13 @@ const Container = styled.div`
     font-size: 1.5em;
     background-color: ${props => (props.front ? frontColor : backColor)};
 `
+
+const CardLi = styled.li`
+    list-style-type: none;
+    margin-bottom: 10px;
+    margin-top: 10px;
+`
+
 export default function Flashcard({front, back}){
     const [isFront, setIsFront] = useState(true);
 
@@ -34,7 +41,7 @@ export default function Flashcard({front, back}){
 export function FlashcardList({cards}){
     return(<><ul>
             {cards.map(flashcard => (
-                <li><Flashcard front={flashcard.front} back={flashcard.back}></Flashcard></li>
+                <CardLi><Flashcard front={flashcard.front} back={flashcard.back}></Flashcard></CardLi>
             ))}
         </ul></>);
 
