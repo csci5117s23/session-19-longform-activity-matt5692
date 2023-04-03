@@ -8,7 +8,7 @@ const Container = styled.div`
     text-align: center;
     border-style: solid;
     font-size: 1.5em;
-    background-color: ${props => (props.front ? frontColor : backColor)};
+    background-color: ${props => (props.back ? backColor : frontColor)};
 `
 
 const CardLi = styled.li`
@@ -25,13 +25,13 @@ export default function Flashcard({front, back}){
     }
 
     if(isFront){
-        return(<><Container front>
-            <p className="front" onClick={handleClick}>{front}</p>
+        return(<><Container>
+            <p onClick={handleClick}>{front}</p>
             </Container>  
             </>);
     } else{
-        return(<><Container>
-            <p className="back" onClick={handleClick}>{back}</p>
+        return(<><Container back>
+            <p onClick={handleClick}>{back}</p>
             </Container>
             </>);
     }
@@ -45,4 +45,34 @@ export function FlashcardList({cards}){
             ))}
         </ul></>);
 
+}
+
+export function FlashcardBuilder({onAdd}){
+    function handleSubmit(e){
+        e.preventDefault();
+
+        const front = document.querySelector("#frontInput");
+        const back = document.querySelector("#backInput")
+
+        onAdd(front.value, back.value);
+
+        front.value = "";
+        back.value = "";
+    }
+    
+    return(<>
+    <Container>
+    <form onSubmit={handleSubmit}>
+        <label>
+            Front:
+            <input name="front" id="frontInput"></input>
+        </label>
+        <label>
+            Back:
+            <input name="back" id="backInput"></input>
+        </label>
+        <button type="submit">Build</button>
+    </form>
+    </Container>
+    </>)
 }
